@@ -88,9 +88,10 @@ public class DirectorySearch {
             System.out.printf("%s    └── Files: %d%n", indent, fileCountMap.getOrDefault(directory, 0));
             System.out.printf("%s    └── Subdirectories: %d%n", indent, subDirCountMap.getOrDefault(directory, 0));
         }
+
+        displayStatistics();
     }
 
-    // Get depth of a directory
     private int getDirectoryDepth(File directory) {
         int depth = 0;
         while (directory.getParentFile() != null) {
@@ -100,7 +101,17 @@ public class DirectorySearch {
         return depth;
     }
 
-    // Getters for statistics
+    public void displayStatistics() {
+        int totalSubDirCount = 0;
+        for (Integer integer : subDirCountMap.values()) {
+            totalSubDirCount += integer;
+        }
+        System.out.println("\n--- Directory Statistics ---");
+        System.out.println("Total Root Directories: " + rootDirectories.size());
+        System.out.println("Total Subdirectories: " + totalSubDirCount);
+        System.out.println("Total Files: " + totalFileCount);
+    }
+
     public int getDirectoryCount() {
         return directoryCount;
     }
